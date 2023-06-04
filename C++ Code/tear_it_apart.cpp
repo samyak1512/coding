@@ -9,15 +9,17 @@ signed main(){
 	while(t--){
 		string s;
 		cin>>s;
-		map<char,int>m;
-		for (int i = 0; i < s.size(); ++i)
-		{
-			m.insert({s[i],m[s[i]]++});
- 		}
+		// map<char,int>m;
+		// for (int i = 0; i < s.size(); ++i)
+		// {
+		// 	m.insert({s[i],m[s[i]]++});
+ 	// 	}
 
- 		for(auto &pr:m){
- 			cout<<pr.first<<" "<<pr.second<<endl;
- 		}
- 		cout<<endl;
+ 	// 	for(auto &pr:m){
+ 	// 		cout<<pr.first<<" "<<pr.second<<endl;
+ 	// 	}
+ 	// 	cout<<endl;
+
+		
 	}
 }
