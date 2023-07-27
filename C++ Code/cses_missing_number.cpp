@@ -49,7 +49,27 @@ bool prime(int n){
 }
 /*.....................................................*/
 
-void solve(int t){}
+void solve(int t){
+    int n;
+    cin>>n;
+    vector<int>v(n, -1);
+    for(int i=0;i<n-1;i++){
+        int x;
+        cin>>x;
+
+        v[x-1] = x;
+    }
+    int index=0;
+    for(int i=0;i<v.size();i++){
+        // cout<<v[i]<<" ";
+        if(v[i]==-1){
+            index = i;
+        }
+    }
+    // cout<<endl;
+
+    cout<<index+1<<endl;
+}
 
 
 
@@ -67,7 +87,7 @@ void solve(int t){}
 signed main(){
     fastio();
     int t=1;
-    cin>>t;
+    // cin>>t;
     for(int i=0;i<t;i++){
         solve(t);
     }
