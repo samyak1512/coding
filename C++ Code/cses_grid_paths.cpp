@@ -49,7 +49,11 @@ bool prime(int n){
 }
 /*.....................................................*/
 int f(vector<vector<char>>&grid, int i, int j){
-    if(i<)
+    int n = grid.size();
+    if(i<0 or j<0 or j>=n or i>=n){
+        return 0;
+    }
+    
 }
 void solve(int t){
     int n;
