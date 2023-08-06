@@ -48,23 +48,39 @@ bool prime(int n){
     return true;
 }
 /*.....................................................*/
-int f(vector<int>& nums, vector<int>& dp, int index) {
-    if (index < 0) {
+// int count=0;
+int f(vector<int>coins, vector<int>& dp, int amount_to_be_used) {
+    if (amount_to_be_used < 0) {
         return 0;
     }
-    if (index == 0) {
+    if (amount_to_be_used == 0) {
+        // count++;
+        cout<<"hi"<<endl;
         return 1;
     }
-    if (dp[index] != -1) {
-        return dp[index];
+    if (dp[amount_to_be_used] != -1) {
+        return dp[amount_to_be_used];
     }
-    dp[index] = 0;
-    for (int i = 0; i < nums.size(); i++) {
-        if (nums[i] <= index) { // Ensure the element can be used to reach the sum.
-            dp[index] = (dp[index] + f(nums, dp, index - nums[i])) % MOD;
-        }
+    dp[amount_to_be_used] = 0;
+    // vector<int>temp_array = nums;
+    while (coins.size()>0) {
+        // if (coins[0] <= amount_to_be_used) { // Ensure the element can be used to reach the sum.
+
+            for (int j = 0; j < coins.size(); ++j)
+            {
+                cout<<coins[j]<<"  ";
+            }
+            cout<<amount_to_be_used<<endl;
+            dp[amount_to_be_used] = (dp[amount_to_be_used] + f(coins, dp, amount_to_be_used - coins[0]));
+            reverse(coins.begin(), coins.end());
+            coins.pop_back();
+            reverse(coins.begin(), coins.end());
+            
+        // }
+
     }
-    return dp[index];
+     cout<<dp[amount_to_be_used]<<endl;
+    return dp[amount_to_be_used];
 }
 void solve(int t){
     int n;
@@ -75,20 +91,24 @@ void solve(int t){
     for(int i=0;i<n;i++){
         cin>>nums[i];
     }
-    if(n==1 and x==1 and nums[0] == 1000000){
-        cout<<0<<endl;
-        return;
-    }
+    sort(nums.begin(), nums.end());
+    // for (int j = 0; j < nums.size(); ++j)
+    //         {
+    //             cout<<nums[j]<<" ";
+    //         }
+    //         cout<<endl;
+
+    // cout<<"count "<<count<<endl;
     vector<int>dp(x+1, -1);
     cout<<f(nums, dp, x)%MOD<<endl;
     // for (int i = 0; i < nums.size(); ++i)
     // {
     //     dp[nums[i]] = 1;
     // }
-    // for (int i = 0; i < dp.size(); ++i)
-    // {
-    //     cout<<dp[i]<<" ";
-    // }
+    for (int i = 0; i < dp.size(); ++i)
+    {
+        cout<<dp[i]<<" ";
+    }
  
 }
  
