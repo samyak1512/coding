@@ -48,25 +48,29 @@ bool prime(int n){
     return true;
 }
 /*.....................................................*/
-int f(vector<int>&arr,vector<int>&dp,int index,int target){
-
-    if(index<0){
-        return 0;
-    }
-    if(index==0 and target ==0){
-        return 1;
-    }
+int f(vector<int>&arr,vector<vector<int>>&dp,int index,int target){
     if(target==0){
         return 1;
+    }
+    if(index<0){
+        return 0;
     }
     if(target<0){
         return 0;
     }
 
+    // if(index==0){
+        
+    // }
+
+    if(dp[index][target]!=-1){
+        return dp[index][target];
+    }
+
     int pick = f(arr,dp,index, target-arr[index]);
     int notPick = f(arr,dp, index-1, target);
 
-    return  pick + notPick;
+    return  dp[index][target] = (pick + notPick)%MOD;
 
 
 }
@@ -78,8 +82,8 @@ void solve(int t){
     for(int i=0;i<n;i++){
         cin>>arr[i];
     }
-    sort(arr.begin(), arr.end());
-    vector<int>dp(x+1, -1);
+    //sort(arr.begin(), arr.end());
+    vector<vector<int>>dp(n+1, vector<int>(x+1, -1));
     cout<<f(arr,dp, n-1, x)<<endl;
 
     // for (int i = 0; i < dp.size(); ++i)
