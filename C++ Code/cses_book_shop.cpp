@@ -1,54 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
-#define int long long
-
-int f(vector<int>& books, vector<int>& dp, vector<int>& costofBook, int cost, int x, int index) {
-    if (index == books.size()) {
-        return 0;
-    }
-
-    if (dp[index][costofBook[index]] != -1) {
-        return dp[index][costofBook[index]];
-    }
-
-    int pick = (cost + costofBook[index] > 0?f(books, dp, costofBook, cost - costofBook[index], x, index + 1) + books[index]:0);
-    int notpick = f(books, dp, costofBook, cost, x, index + 1);
-
-    dp[index][costofBook[index]] = max(pick, notpick);
-    return dp[index][costofBook[index]];
-}
+// ... (Macro definitions and utility functions)
 
 void solve() {
-    int n, x;
-    cin >> n >> x;
-    vector<int> books(n);
-    vector<int> costofBook(n);
-    
+    int n, maxprice;
+    cin >> n >> maxprice;
+    // cout<<"hi"<<endl;
+    vector<int> priceofBook(n);
+    vector<int> pagesofBook(n);
     for (int i = 0; i < n; ++i) {
-        cin >> costofBook[i];
+        cin >> priceofBook[i];
     }
     for (int i = 0; i < n; ++i) {
-        cin >> books[i];
+        cin >> pagesofBook[i];
     }
-
-    vector<int> dp(x+1, vector<int>(n+1, -1);
-    // for(int i = 1; i <= n; ++i)
+    vector<vector<int>> dp(n + 1, vector<int>(maxprice + 1, 0));
+    // dp[0][0] = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= maxprice; j++) {
+            if (j >= priceofBook[i - 1]) {
+                dp[i][j] = max(dp[i - 1][j], pagesofBook[i - 1] + dp[i - 1][j - priceofBook[i - 1]]);
+            }
+            else {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+    cout << dp[n][maxprice] << endl;
+    // for (int i = 0; i < n+1; ++i)
     // {
-    //     for(int j = x; j >= costofBook[i - 1]; --j)
+    //     for (int j = 0; j < maxprice+1; ++j)
     //     {
-    //         dp[j] = max(dp[j], dp[j - costofBook[i - 1]] + books[i - 1]);
+    //         cout<<dp[i][j]<<" ";
     //     }
+    //     cout<<endl;
     // }
-    cout << f(books, dp, costofBook, 0, x, 0);
-// }
+}
+
 
 signed main() {
-    fastio();
-    int t = 1;
+    // fastio();
+    int t=1;
     // cin >> t;
-    for (int i = 0; i < t; i++) {
+
+    // cout<<"hi"<<endl;
+    while(t--){
         solve();
     }
     return 0;
