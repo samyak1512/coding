@@ -5,8 +5,6 @@
 using namespace std;
 using namespace chrono;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
-// #define int long long
-// #define ll long long
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -56,21 +54,33 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 void solve()
 {
 	ll n;
-	ll l;
-	ll r;
-	ll s;
-	cin>>n>>l>>r>>s;
-	ll num = r-l+1;
-	ll minsum = num*(num+1)/2;
-	ll maxsum = n*(n+1)/2 - minsum;
-	if(s>maxsum or s<minsum){
-		cout<<-1<<endl;
+	ll k;
+	ll g;
+	cin>>n>>k>>g;
+
+	ll sum = 0;
+	ll total  = k*g;
+	ll x = ceil(g/2.0);
+			
+	sum = (n-1)*(x-1);
+	if(sum>total){
+		sum = total;
 	}
-
-
+	// cout<<"sum"<<sum<<endl;
+	ll left = total-sum;
+	ll answer;
+	// llcout<<"left"<<left<<endl;
+	if(left%g>=ceil(g/2.0)){
+		answer = left + (g-left%g);
+	}
+	else{
+		answer = left-left%g;
+	}
+	cout<<total-answer<<endl;
+		
 }
 
-signed main() 
+int main() 
 {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);   

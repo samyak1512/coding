@@ -5,8 +5,6 @@
 using namespace std;
 using namespace chrono;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
-// #define int long long
-// #define ll long long
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -55,22 +53,77 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 void solve()
 {
-	ll n;
-	ll l;
-	ll r;
-	ll s;
-	cin>>n>>l>>r>>s;
-	ll num = r-l+1;
-	ll minsum = num*(num+1)/2;
-	ll maxsum = n*(n+1)/2 - minsum;
-	if(s>maxsum or s<minsum){
-		cout<<-1<<endl;
+	int n;
+	cin>>n;
+	int maxi = 0;
+	vector<vector<int>>v;
+	for(int i=0;i<n;i++){
+		int s;
+		cin>>s;
+		vector<int>temp;
+		for(int j=0;j<s;j++){
+			int x;
+			cin>>x;
+			maxi = max(maxi, x);
+			temp.push_back(x);
+		}
+		v.push_back(temp);
+	}
+	debug(v);
+	int split =0;
+	int comb = 0;
+	vector<vector<pair<int, int>>>answer;
+
+	for(auto it:v){
+		vector<pair<int,int>>temp;
+		for(int i=0;i<it.size();i++){
+			temp.push_back({it[i], 0});
+		}
+		answer.push_back(temp);
+
+	}
+	
+	debug(answer);
+	int i =0;
+	int count = 0;
+	while(i<=maxi){
+		for(auto& it:answer){
+			// debug(answer);
+			for(auto& il:it){
+				if(il.first==i){
+					debug(il);
+					debug(count);
+					
+					il.second=count;
+					count++;
+					
+				}
+			}
+		}
+		i++;
+	}
+	debug(split);
+	for(auto& it:answer){
+		for(int i=0;i<it.size()-1;i++){
+			if(it[i+1].second-it[i].second!=1){
+				debug(it[i]);
+				split++;
+			}
+		}
 	}
 
 
+	debug(v);
+	debug(answer);
+	debug(split);
+	comb = n+split-1;
+	debug(comb);
+	cout<<split<<" "<<comb<<endl;
+
+	
 }
 
-signed main() 
+int main() 
 {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);   
@@ -80,7 +133,7 @@ signed main()
         fastio();
         auto start1 = high_resolution_clock::now();
         int tt = 1;
-        cin >> tt;
+        // cin >> tt;
         while (tt--)
         {
             solve();
