@@ -55,101 +55,50 @@ void solve()
 {
 	int n;
 	cin>>n;
-	int maxi = 0;
-	map<int, int>mymap;
-	vector<vector<int>>v;
-	for(int i=0;i<n;i++){
-		int s;
-		cin>>s;
-		vector<int>temp;
-		for(int j=0;j<s;j++){
-			int x;
-			cin>>x;
-			maxi = max(maxi, x);
-			temp.push_back(x);
-		}
-		v.push_back(temp);
+	vector<int>start(n);
+	for (int i = 0; i < n; ++i)
+	{
+		cin>>start[i];
 	}
-	debug(v);
-	int split =0;
-	int comb = 0;
-	vector<vector<pair<int, int>>>answer;
-
-	for(auto it:v){
-		vector<pair<int,int>>temp;
-		for(int i=0;i<it.size();i++){
-			temp.push_back({it[i], 0});
-		}
-		answer.push_back(temp);
-
+	vector<int>end(n);
+	for (int i = 0; i < n; ++i)
+	{
+		cin>>end[i];
 	}
-	vector<int>sortedv;
-	set<pair<int, int>>se;
-	for(auto it:v){
-		for(auto il:it){
-			sortedv.push_back(il);
-		}
-	}
-	sort(sortedv.begin(), sortedv.end());
-	int j = 0;
-	for(auto it:sortedv){
-		
-			mymap.insert({it, j++});
-	}
-	debug(mymap);
-	debug(answer);
-	// int i =0;
-	// int count = 0;
-	// while(i<=maxi){
-	// 	for(auto& it:answer){
-	// 		// debug(answer);
-	// 		for(auto& il:it){
-	// 			if(il.first==i){
-	// 				debug(il);
-	// 				debug(count);
-					
-	// 				il.second=count;
-	// 				count++;
-					
-	// 			}
-	// 		}
-	// 	}
-	// 	i++;
-	// }
-	// debug(mymap);
-	for(auto& it:answer){
-		for(auto& il:it){
-
-			auto sam = mymap.find(il.first);
-			// cout<<sam->first<<endl;
-			// debug(sam->first);
-			// debug(sam->second);
-			debug(sam->second);
-			debug(il);
-			il.second = sam->second;
-			debug(il);
-			// debug(sam->second);
-		}
-	}
-	debug(split);
-	for(auto& it:answer){
-		for(int i=0;i<it.size()-1;i++){
-			if(it[i+1].second-it[i].second!=1){
-				// debug(it[i]);
-				split++;
+	vector<int, int>query;
+	int x, y;
+	cin>>x>>y;
+	query.insert({x, y});
+	int k;
+	cin>>k;
+	
+	int answer = 0;
+	int time = 0;
+	
+	while(time<=y){
+		int flag1 = 0;
+		int flag2 = 0;
+		int count = 0;
+		for (int i = 0; i < n; ++i)
+		{
+			if(start[i]<=time){
+				flag1 = 1;
 			}
 		}
+		for (int i = 0; i < n; ++i)
+		{
+			if(end[i]>time){
+				flag2 = 0;
+			}
+		}
+		if(flag1 and flag2){
+			count++;
+		}
+		if(count)
+
 	}
 
 
-	debug(v);
-	debug(answer);
-	debug(split);
-	comb = n+split-1;
-	debug(comb);
-	cout<<split<<" "<<comb<<endl;
-
-	
 }
 
 int main() 

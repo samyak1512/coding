@@ -55,101 +55,40 @@ void solve()
 {
 	int n;
 	cin>>n;
-	int maxi = 0;
-	map<int, int>mymap;
-	vector<vector<int>>v;
-	for(int i=0;i<n;i++){
-		int s;
-		cin>>s;
-		vector<int>temp;
-		for(int j=0;j<s;j++){
-			int x;
-			cin>>x;
-			maxi = max(maxi, x);
-			temp.push_back(x);
-		}
-		v.push_back(temp);
+	vector<int>x(n);
+	vector<int>y(n);
+	for (int i = 0; i < n; ++i)
+	{
+		cin>>x[i];
 	}
-	debug(v);
-	int split =0;
-	int comb = 0;
-	vector<vector<pair<int, int>>>answer;
-
-	for(auto it:v){
-		vector<pair<int,int>>temp;
-		for(int i=0;i<it.size();i++){
-			temp.push_back({it[i], 0});
-		}
-		answer.push_back(temp);
-
+	for (int i = 0; i < n; ++i)
+	{
+		cin>>y[i];
 	}
-	vector<int>sortedv;
-	set<pair<int, int>>se;
-	for(auto it:v){
-		for(auto il:it){
-			sortedv.push_back(il);
-		}
+	int dist = 0;
+	debug(x);
+	debug(y);
+	vector<pair<int, int>>v;
+	for (int i = 0; i < n; ++i)
+	{
+		v.push_back({x[i], y[i]});
 	}
-	sort(sortedv.begin(), sortedv.end());
-	int j = 0;
-	for(auto it:sortedv){
-		
-			mymap.insert({it, j++});
-	}
-	debug(mymap);
-	debug(answer);
-	// int i =0;
-	// int count = 0;
-	// while(i<=maxi){
-	// 	for(auto& it:answer){
-	// 		// debug(answer);
-	// 		for(auto& il:it){
-	// 			if(il.first==i){
-	// 				debug(il);
-	// 				debug(count);
-					
-	// 				il.second=count;
-	// 				count++;
-					
-	// 			}
-	// 		}
-	// 	}
-	// 	i++;
-	// }
-	// debug(mymap);
-	for(auto& it:answer){
-		for(auto& il:it){
-
-			auto sam = mymap.find(il.first);
-			// cout<<sam->first<<endl;
-			// debug(sam->first);
-			// debug(sam->second);
-			debug(sam->second);
-			debug(il);
-			il.second = sam->second;
-			debug(il);
-			// debug(sam->second);
-		}
-	}
-	debug(split);
-	for(auto& it:answer){
-		for(int i=0;i<it.size()-1;i++){
-			if(it[i+1].second-it[i].second!=1){
-				// debug(it[i]);
-				split++;
+	debug(v)
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < n; ++j)
+		{	
+			int temp = 0;
+			if(i!=j){
+				int dx = x[i]-x[j];
+				int dy = y[i]-y[j];
+				temp = dx*dx + dy*dy;
 			}
+			dist = max(dist, temp);
 		}
 	}
 
-
-	debug(v);
-	debug(answer);
-	debug(split);
-	comb = n+split-1;
-	debug(comb);
-	cout<<split<<" "<<comb<<endl;
-
-	
+	cout<<dist<<endl;
 }
 
 int main() 
