@@ -51,13 +51,42 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-void solve()
-{
+void solve(int count)
+{   
+    // int count = 1;
+    // int totaly = total;
+    // int hola  = totaly - testcase;
 	int n;
-	cin>>n;
-	string s;
-	cin>>s;
-    cout<<s;
+	int k;
+    cin>>n>>k;
+    vector<int>v(n);
+    for (int i = 0; i < n; ++i)
+    {
+        cin>>v[i];
+    }
+    if(n>2*k){
+        std::cout << "Case #" << count << ": NO" << std::endl;
+    }
+    else{
+        map<int, int>mymap;
+        for (int i = 0; i < n; ++i)
+        {
+            mymap[v[i]]++;
+        }
+        int flag = 0;
+        for(auto it:mymap){
+            if(it.second>2){
+                std::cout << "Case #" << count << ": NO" << std::endl;
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            std::cout << "Case #" << count << ": YES" << std::endl;
+        }
+
+    }
+    
+
 	
 }
 
@@ -72,9 +101,12 @@ int main()
         auto start1 = high_resolution_clock::now();
         int tt = 1;
         cin >> tt;
+        int count = 1;
+        int total = tt;
         while (tt--)
         {
-            solve();
+            solve(count);
+            count++;
         }
         auto stop1 = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop1 - start1);

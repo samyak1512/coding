@@ -53,7 +53,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 void solve()
 {
-	cout<<"hi";
+	cout<<"hiiiii";
 }
 
 int main() 
