@@ -1,0 +1,22 @@
+t = int(input())
+
+for c in range(t):
+    print(f'Case #{c+1}: ', end='')
+    # sam = input().split()
+    n = int(input())
+    # k = int(sam[1])
+    arr = list(int(i) for i in input().split())
+    arr.sort()
+    x = -1
+    
+    if n==4:
+        x = (arr[-1] + arr[-2]) / 2 - (arr[0] + arr[1]) / 2
+    elif n == 5:
+        y = (arr[-1] + arr[-3]) / 2 - (arr[0] + arr[1]) / 2
+        z = (arr[-1] + arr[-2]) / 2 - (arr[0] + arr[2]) / 2
+        x = max(y, z)
+    else:
+        x = (arr[-1] + arr[-2]) / 2 - (arr[0] + arr[1]) / 2
+    
+    print(f'{x:.8f}')
+     
