@@ -1,103 +1,46 @@
 #!/usr/bin/env python
-# from __future__ import division, print_function
-from collections import defaultdict
-import time
+from __future__ import division, print_function
+
 import os
 import sys
 from io import BytesIO, IOBase
-from functools import lru_cache
-
 
 if sys.version_info[0] < 3:
     from __builtin__ import xrange as range
     from future_builtins import ascii, filter, hex, map, oct, zip
 
-MAXN = int(1e5 + 10)
 
-# def main():
-    
-#     t = int(input())
-#     is_prime = [True]*(MAXN)
-#     primes = []
-        
-#         # print(is_prime)
-        
-#     for i in range(2,MAXN):
-#         if(is_prime[i]):
-#             primes.append(i)
-#             for j in range(i*2, MAXN, i):
-#                 is_prime[j] = False
-#     # print(primes)
-#     for _ in range(t):
-#         n = int(input())
-#         a = list(map(int, input().split()))
-        
-#         p_cnt = defaultdict(int)
-#         ok = False
-        
-#         for v in a:
-#             curr = v
-#             for d in primes:
-#                 if d*d>v:
-#                     break
-#                 if curr%d==0:
-#                     p_cnt[d]+=1
-#                     if p_cnt[d]>1:
-#                         ok = True
-#                         break
-#                 while curr%d==0:
-#                     curr //= d
-#             if curr>1:
-#                 p_cnt[curr] += 1
-#                 if p_cnt[curr]>1:
-#                     ok = True
-#             if ok:
-#                 break
-#         print("yes" if ok else "no")
-                    
-        
 def main():
     t = int(input())
- 
-    is_prime = [True] * (MAXN)
-    primes = []
- 
-    for i in range(2, MAXN):
-        if is_prime[i]:
-            primes.append(i)
-            for j in range(i * 2, MAXN, i):
-                is_prime[j] = False
- 
-    while t:
-        n = int(input())
-        a = list(map(int, input().split()))
- 
-        p_cnt = defaultdict(int)
- 
-        ok = False
-        for v in a:
-            curr = v
-            for d in primes:
-                if d * d > curr:
-                    break
-                if curr % d == 0:
-                    p_cnt[d] += 1
-                    if p_cnt[d] > 1:
-                        ok = True
-                        break
-                while curr % d == 0:
-                    curr //= d
-            if curr > 1:
-                p_cnt[curr] += 1
-                if p_cnt[curr] > 1:
-                    ok = True
-            if ok:
-                break
-        print("YES" if ok else "NO")
-        t -= 1
- 
+    for _ in range(t):
+        n, x, y = map(int, input().split())
+        a = input()
+        b = input()
+        count = 0
+        c = 0
+        for i in range(len(a)):
+            if a[i]!=b[i]:
+                count+=1
+                c = i
+        if count%2!=0:
+            print(-1)   
+        else:
+            arr = []
+            for i in range(len(a)):
+                if a[i]!=b[i]:
+                    arr.append(i)
+            if count == 2:
+                if a[c]!=b[c] and a[c-1]!= b[c-1]:
+                    print( min(x, 2*y))
+                else:
+                    print(y)
+            else:
+                print((count//2)*y)
+           
+                        
+                    
+                
         
-    
 
 
 # region fastio
@@ -168,11 +111,9 @@ if sys.version_info[0] < 3:
 else:
     sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
 
-def input(): return sys.stdin.readline().rstrip("\r\n")
+input = lambda: sys.stdin.readline().rstrip("\r\n")
 
 # endregion
 
 if __name__ == "__main__":
     main()
-    start_time = time.time()
-    print(f'Execution time: {time.time() - start_time} s', file=sys.stderr)
