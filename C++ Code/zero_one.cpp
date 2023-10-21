@@ -27,17 +27,21 @@ int main() {
         if (count % 2 != 0) {
             cout << -1 << endl;
         } else {
-            vector<int> arr;
+            // vector<int> arr;
 
-            for (int i = 0; i < n; ++i) {
-                if (a[i] != b[i]) {
-                    arr.push_back(i);
-                }
-            }
+            // for (int i = 0; i < n; ++i) {
+            //     if (a[i] != b[i]) {
+            //         arr.push_back(i);
+            //     }
+            // }
 
             if (count == 2) {
                 if (a[c] != b[c] && a[c - 1] != b[c - 1]) {
                     cout << min(x, 2 * y) << endl;
+                }
+                else{
+                    cout<<y<<endl;
+                    return 0;
                 }
             } else {
                 cout << (count / 2) * y << endl;

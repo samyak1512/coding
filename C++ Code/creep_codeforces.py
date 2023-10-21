@@ -8,56 +8,27 @@ from io import BytesIO, IOBase
 if sys.version_info[0] < 3:
     from __builtin__ import xrange as range
     from future_builtins import ascii, filter, hex, map, oct, zip
-def is_palindrome(s):
-    # Define a prime number for hashing
-    prime = 31
 
-    # Calculate the hash of the string
-    hash_forward, hash_backward = 0, 0
-    power = 1
-
-    for i in range(len(s)):
-        hash_forward = (hash_forward + (ord(s[i]) - ord('a') + 1) * power) % (10**9 + 9)
-        hash_backward = (hash_backward * prime + (ord(s[i]) - ord('a') + 1)) % (10**9 + 9)
-        power = (power * prime) % (10**9 + 9)
-
-    # Check if the forward and backward hashes are equal
-    return hash_forward == hash_backward
-
-def generate_subsets(nums):
-    n = len(nums)
-    all_subsets_as_strings = []
-
-    for i in range(1, 2**n):  # Start from 1 to exclude the empty subset
-        subset = ''.join([str(nums[j]) for j in range(n) if (i & (1 << j)) > 0])
-        all_subsets_as_strings.append(subset)
-
-    return all_subsets_as_strings
 
 def main():
     t = int(input())
     for _ in range(t):
-        n = int(input())
-        arr = []
-        for _ in range(n):
-            s = input()
-            arr.append(s)
-        # print(arr)
-        combinations = generate_subsets(arr)
-        # print(combinations)
-        flag = 0
-        
-        for i in combinations:
-            result = is_palindrome(i)
-            # print(result)
-            if result:
-                flag = 1
-                break
-        if flag:
-            print("yes")
-        else:
-            print("no")
-    
+        zeroes, ones = map(int, input().split())
+        s = ""
+        for _ in range(ones+zeroes):
+            if zeroes:
+                s = s + '0'
+                zeroes-=1
+            if ones:
+                s = s + '1'
+                ones-=1  
+            if zeroes:
+                s = s + '0'
+                zeroes-=1
+            if ones:
+                s = s + '1'
+                ones-=1   
+        print(s)
 
 
 # region fastio
