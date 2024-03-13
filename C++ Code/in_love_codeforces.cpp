@@ -53,37 +53,39 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 void solve()
 {
-int n;
-        cin >> n;
-        vector<int> v(n);
-        set<int> se;
+	int q;
+	cin>>q;
+	multiset<int>l1, r1;
+	for (int i = 0; i < q; ++i)
+	{
+		char c;
+		int l;
+		int r;
+		cin>>c>>l>>r;
+		if(c=='+'){
+			l1.insert(l);
+			r1.insert(r);
 
-        for (int i = 0; i < n; i++)
-        {
-            cin >> v[i];
-            se.insert(v[i]);
-        }
-        vector<int> l;
-        for (auto x : se)
-        {
-            l.push_back(x);
-        }
-        int k = n;
-        n = l.size();
-        int ans = 1;
-        // for (int i = 0; i < n; i++)
-        // {
-        //     cout << l[i] << " ";
-        // }
-        // cout << endl;
-        for (int i = 0; i < n; i++)
-        {
-            int en = l[i] + k - 1;
-            int it = upper_bound(l.begin(), l.end(), en) - l.begin() - i;
-            // cout<<it<<endl;
-            ans = max(ans, it);
-        }
-        cout << ans << endl;
+		}
+		else{
+			l1.erase(l1.find(l));
+			r1.erase(r1.find(r));
+
+		}
+		if(l1.empty() or r1.empty()){
+			cout<<"NO"<<endl;
+			continue;
+		}
+		int min1 = *l1.rbegin();
+		int min2 = *r1.begin();
+		if(min1>min2){
+			cout<<"yes"<<endl;
+		}
+		else{
+			cout<<"no"<<endl;
+		}
+
+	}
 }
 
 int main() 
@@ -96,7 +98,7 @@ int main()
         fastio();
         auto start1 = high_resolution_clock::now();
         int tt = 1;
-        cin >> tt;
+        // cin >> tt;
         while (tt--)
         {
             solve();

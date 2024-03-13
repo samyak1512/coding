@@ -1,53 +1,112 @@
-#include <iostream>
-#include <vector>
+#pragma GCC optimize("O3,unroll-loops")
+
+#include<bits/stdc++.h>
 
 using namespace std;
+using namespace chrono;
+#define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define MOD 1000000007
+#define MOD1 998244353
+#define INF 1e18
+#define nl '\n'
+#define pb push_back
+#define ppb pop_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define PI 3.141592653589793238462
+#define set_bits __builtin_popcountll
+#define sz(x) ((int)(x).size())
+#define all(x) (x).begin(), (x).end()
+#define clr(x) memset(x, 0, sizeof(x))
 
-int main() {
-    int t;
-    cin >> t;
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x<<" "; _print(x); cerr << endl;
+#else
+#define debug(x);
+#endif
 
-    for (int test_case = 0; test_case < t; ++test_case) {
-        int n, x, y;
-        cin >> n >> x >> y;
-        
-        string a, b;
-        cin >> a >> b;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
 
-        int count = 0;
-        int c = 0;
+void _print(ll t) {cerr << t;}
+void _print(int t) {cerr << t;}
+void _print(string t) {cerr << t;}
+void _print(char t) {cerr << t;}
+void _print(lld t) {cerr << t;}
+void _print(double t) {cerr << t;}
+void _print(ull t) {cerr << t;}
 
-        for (int i = 0; i < n; ++i) {
-            if (a[i] != b[i]) {
-                count += 1;
-                c = i;
-            }
+template <class T, class V> void _print(pair <T, V> p);
+template <class T> void _print(vector <T> v);
+template <class T> void _print(set <T> v);
+template <class T, class V> void _print(map <T, V> v);
+template <class T> void _print(multiset <T> v);
+template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
+template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+
+void solve() {
+    int n;
+    cin >> n;
+    string v1, v2;
+    cin >> v1;
+    cin >> v2;
+    string ans = "";
+    ans += v1[0];
+    vector<int> pref;
+    for (int i = 1; i < n; i++)
+    {
+        if(v1[i] <= v2[i-1]){
+            ans += v1[i];
+            pref.push_back(i);
         }
-
-        if (count % 2 != 0) {
-            cout << -1 << endl;
-        } else {
-            // vector<int> arr;
-
-            // for (int i = 0; i < n; ++i) {
-            //     if (a[i] != b[i]) {
-            //         arr.push_back(i);
-            //     }
-            // }
-
-            if (count == 2) {
-                if (a[c] != b[c] && a[c - 1] != b[c - 1]) {
-                    cout << min(x, 2 * y) << endl;
-                }
-                else{
-                    cout<<y<<endl;
-                    return 0;
-                }
-            } else {
-                cout << (count / 2) * y << endl;
+        else{
+            for (int j = i-1; j < n-1; j++)
+            {
+                ans += v2[j];
             }
+            break;
         }
     }
+    ans += v2[n - 1];
+    cout << ans<<endl;
+    int count = 1;
+    for (int i = pref.size()-1; i >= 0; i--)
+    {
+        if(v1[pref[i]] == v2[pref[i] - 1]){
+            count++;
+        }
+        else{
+            break;
+        }
+    }
+    cout << count<<endl;
+}
 
-    return 0;
+signed main() 
+{
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);   
+        freopen("output.txt", "w", stdout);
+        freopen("error.txt", "w", stderr);
+    #endif
+        fastio();
+        auto start1 = high_resolution_clock::now();
+        int tt = 1;
+        cin >> tt;
+        while (tt--)
+        {
+            solve();
+        }
+        auto stop1 = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop1 - start1);
+    #ifndef ONLINE_JUDGE
+        cerr << "Time: " << duration . count() / 1000 << endl;
+    #endif
 }
