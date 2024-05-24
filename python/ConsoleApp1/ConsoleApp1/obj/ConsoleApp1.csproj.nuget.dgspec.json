@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/samyakjain/Documents/GitHub/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj": {}
+    "/Users/samyakjain/Documents/GitHub/coding/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj": {}
   },
   "projects": {
-    "/Users/samyakjain/Documents/GitHub/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj": {
+    "/Users/samyakjain/Documents/GitHub/coding/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/samyakjain/Documents/GitHub/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj",
+        "projectUniqueName": "/Users/samyakjain/Documents/GitHub/coding/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "/Users/samyakjain/Documents/GitHub/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj",
+        "projectPath": "/Users/samyakjain/Documents/GitHub/coding/python/ConsoleApp1/ConsoleApp1/ConsoleApp1.csproj",
         "packagesPath": "/Users/samyakjain/.nuget/packages/",
-        "outputPath": "/Users/samyakjain/Documents/GitHub/python/ConsoleApp1/ConsoleApp1/obj/",
+        "outputPath": "/Users/samyakjain/Documents/GitHub/coding/python/ConsoleApp1/ConsoleApp1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/samyakjain/.nuget/NuGet/NuGet.Config"
