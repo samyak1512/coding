@@ -12,5 +12,5 @@ for i in range(n):
         if target in mydict and mydict[target] != i+1 and mydict[target] != j+1:
             print(i+1, j+1, mydict[target])
             exit(0)
-
+# hi
 print("IMPOSSIBLE")
