@@ -51,45 +51,13 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-void solve() {
-    int n;
-    cin >> n;
-    string v1, v2;
-    cin >> v1;
-    cin >> v2;
-    string ans = "";
-    ans += v1[0];
-    vector<int> pref;
-    for (int i = 1; i < n; i++)
-    {
-        if(v1[i] <= v2[i-1]){
-            ans += v1[i];
-            pref.push_back(i);
-        }
-        else{
-            for (int j = i-1; j < n-1; j++)
-            {
-                ans += v2[j];
-            }
-            break;
-        }
-    }
-    ans += v2[n - 1];
-    cout << ans<<endl;
-    int count = 1;
-    for (int i = pref.size()-1; i >= 0; i--)
-    {
-        if(v1[pref[i]] == v2[pref[i] - 1]){
-            count++;
-        }
-        else{
-            break;
-        }
-    }
-    cout << count<<endl;
+void solve()
+{
+    cout<<"hi";
+
 }
 
-signed main() 
+int main() 
 {
     #ifndef ONLINE_JUDGE
         freopen("input.txt", "r", stdin);   

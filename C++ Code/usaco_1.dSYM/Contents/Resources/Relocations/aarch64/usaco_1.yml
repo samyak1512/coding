@@ -1,0 +1,16 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/samyakjain/Documents/GitHub/coding/C++ Code/usaco_1'
+relocations:
+  - { offsetInCU: 0xD2, offset: 0xD2, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100007E84, symSize: 0x28 }
+  - { offsetInCU: 0xEA94, offset: 0xEA94, size: 0x8, addend: 0x0, symName: __ZStL8__ioinit, symObjAddr: 0x5EFD0, symBinAddr: 0x10000C020, symSize: 0x0 }
+  - { offsetInCU: 0xF8CC, offset: 0xF8CC, size: 0x8, addend: 0x0, symName: __ZNSt8__detail30__integer_to_chars_is_unsignedIjEE, symObjAddr: 0x7B, symBinAddr: 0x100007F53, symSize: 0x0 }
+  - { offsetInCU: 0xF8E6, offset: 0xF8E6, size: 0x8, addend: 0x0, symName: __ZNSt8__detail30__integer_to_chars_is_unsignedImEE, symObjAddr: 0x7C, symBinAddr: 0x100007F54, symSize: 0x0 }
+  - { offsetInCU: 0xF900, offset: 0xF900, size: 0x8, addend: 0x0, symName: __ZNSt8__detail30__integer_to_chars_is_unsignedIyEE, symObjAddr: 0x7D, symBinAddr: 0x100007F55, symSize: 0x0 }
+  - { offsetInCU: 0xFA2B, offset: 0xFA2B, size: 0x8, addend: 0x0, symName: __ZNSt8__detail30__integer_to_chars_is_unsignedIoEE, symObjAddr: 0x7E, symBinAddr: 0x100007F56, symSize: 0x0 }
+  - { offsetInCU: 0xFA88, offset: 0xFA88, size: 0x8, addend: 0x0, symName: __GLOBAL__sub_I_usaco_1.cpp, symObjAddr: 0x64, symBinAddr: 0x100007EE8, symSize: 0x14 }
+  - { offsetInCU: 0xFAB1, offset: 0xFAB1, size: 0x8, addend: 0x0, symName: __Z41__static_initialization_and_destruction_0v, symObjAddr: 0x28, symBinAddr: 0x100007EAC, symSize: 0x3C }
+  - { offsetInCU: 0xFAB9, offset: 0xFAB9, size: 0x8, addend: 0x0, symName: __GLOBAL__sub_I_usaco_1.cpp, symObjAddr: 0x64, symBinAddr: 0x100007EE8, symSize: 0x14 }
+  - { offsetInCU: 0xFAAD, offset: 0xFAAD, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100007E84, symSize: 0x28 }
+  - { offsetInCU: 0xFAB5, offset: 0xFAB5, size: 0x8, addend: 0x0, symName: __Z41__static_initialization_and_destruction_0v, symObjAddr: 0x28, symBinAddr: 0x100007EAC, symSize: 0x3C }
+...
