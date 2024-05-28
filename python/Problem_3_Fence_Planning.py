@@ -13,4 +13,4 @@ for i in range(m):
         adj[b].append(a)
     else:
         adj[b] = [a]
-print(adj)
+# print(adj)
