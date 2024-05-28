@@ -38,16 +38,16 @@ def bfs(node):
     visited = set()
     q.append(node)
     while q:
-        count+=1
+        # count+=1
         curr_node = q.pop()
         visited.add(curr_node)
         for i in adj[curr_node]:
             if i not in visited:
-                # count+=1 we will not add here
+                count+=1
                 visited.add(i)
                 q.append(i)
         
-    return count
+    return count+1
     
 for i in range(n):
     max_elements = max(max_elements, bfs(i))
