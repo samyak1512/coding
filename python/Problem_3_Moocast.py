@@ -43,6 +43,7 @@ def bfs(node):
         visited.add(curr_node)
         for i in adj[curr_node]:
             if i not in visited:
+                # count+=1 we will not add here
                 visited.add(i)
                 q.append(i)
         
