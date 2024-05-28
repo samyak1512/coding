@@ -14,15 +14,21 @@ def f(x):
     return count
 
 def search():
-    low = 0
-    high = 10**18
+    low = max(arr)
+    high = 10**20
     while low<=high:
         mid = low + (high - low)//2
-        if f(mid) == k:
-            ans = mid
-            break
-        if f(mid) < k:
+        
+        if f(mid) <= k:
             ans = mid
             high = mid - 1
+        if f(mid)>k:
+            # ans = mid
+            low = mid + 1
+            # break
+            
+    return ans
+print(search())
+# print(f())
             
         
