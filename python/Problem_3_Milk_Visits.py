@@ -9,3 +9,5 @@ for i in range(n-1):
     adj[b-1].append(a-1)
 
 print(adj)
+
+for i in range()
