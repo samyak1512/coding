@@ -4,40 +4,39 @@ from sys import setrecursionlimit
 setrecursionlimit(10**9)
 sys.stdin = open("closing.in", "r")
 sys.stdout = open("closing.out", "w")
+
 n, m = map(int, input().split())
 adj = {i: [] for i in range(n)}
-for i in range(m):
+for _ in range(m):
     a, b = map(int, input().split())
     adj[a-1].append(b-1)
     adj[b-1].append(a-1)
-new_length = n
-# print(adj)
 
-def dfs(node):
+def dfs(node, visited):
     visited.add(node)
-    for i in adj[node]:
-        if i not in visited:
-            dfs(i)
-    
-myarr = []
-for i in range(n):
-    myarr.append(i)
-for i in range(n):
-    x = int(input())
+    for neighbor in adj[node]:
+        if neighbor not in visited:
+            dfs(neighbor, visited)
+
+closing_order = []
+for _ in range(n):
+    closing_order.append(int(input()) - 1)
+
+remaining_barns = set(range(n))  # Set of all barns initially open
+
+for x in closing_order:
     visited = set()
-    # print(myarr)
-    dfs(myarr[0])
-    # print(visited, "visited set")
-    if len(visited) == len(myarr):
+    if remaining_barns:  # If there are still barns left open
+        start_node = next(iter(remaining_barns))  # Get an arbitrary open barn to start DFS
+        dfs(start_node, visited)
+    
+    if visited == remaining_barns:
         print("YES")
     else:
         print("NO")
-    new_length-=1
-    myarr.remove(x-1)
-    for i in range(len(adj)):
-        if x-1 in adj[i]:
-            adj[i].remove(x-1)
-    for i in adj:
-        if x-1 in adj[i]:
-            adj[i].remove(x-1)
     
+    remaining_barns.remove(x)  # Close the current barn
+    for neighbor in adj[x]:
+        adj[neighbor].remove(x)
+    adj[x] = []  # Clear the adjacency list for the closed barn
+
