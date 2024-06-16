@@ -1,43 +1,28 @@
-def planets_cycles(n, teleporters):
-    # To store the number of teleportations needed for each planet
-    result = [0] * n
-    # To mark the state of each planet:
-    # 0 - unvisited, 1 - visiting (in current path), 2 - visited (finished)
-    state = [0] * n
+n = int(input())
+arr = list(map(int, input().split()))
+
+adj = {i + 1: arr[i] for i in range(n)}
+dp = [-1] * (n + 1)
+
+for node in range(1, n + 1):
+    if dp[node] != -1:
+        continue
+    visited = {}
+    curr = []
     
-    def dfs(planet):
-        path = []
-        while state[planet] == 0:
-            state[planet] = 1
-            path.append(planet)
-            planet = teleporters[planet] - 1
+    while node not in visited:
+        curr.append(node)
+        visited[node] = len(curr) - 1
+        node = adj[node]
+    
+    if node in visited:
+        repeated_element_ind = visited[node]
+        length_of_cycle = len(curr) - repeated_element_ind
         
-        if state[planet] == 1:
-            cycle_length = 0
-            while path:
-                p = path.pop()
-                state[p] = 2
-                result[p] = cycle_length + 1
-                cycle_length += 1
-                if p == planet:
-                    break
-            while path:
-                p = path.pop()
-                state[p] = 2
-                result[p] = result[planet] + cycle_length
-        else:
-            while path:
-                p = path.pop()
-                state[p] = 2
-                result[p] = result[planet] + len(path) + 1
+        for i in range(len(curr) - 1, repeated_element_ind - 1, -1):
+            dp[curr[i]] = length_of_cycle
+        
+        for i in range(repeated_element_ind - 1, -1, -1):
+            dp[curr[i]] = length_of_cycle + repeated_element_ind - i
 
-    for i in range(n):
-        if state[i] == 0:
-            dfs(i)
-    
-    return result
-
-# Input example
-n = 5
-teleporters = [2, 4, 3, 1, 4]
-print(planets_cycles(n, teleporters))  # Output: [3, 3, 1, 3, 4]
+print(*dp[1:])
