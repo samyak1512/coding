@@ -3,7 +3,7 @@ class DisjointSetUnion:
         self.parent = list(range(n))
         self.size = [1] * n
         self.num_sets = n
-
+        self.max_size = 1
     def find(self, a):
         acopy = a
         while a != self.parent[a]:
@@ -17,9 +17,13 @@ class DisjointSetUnion:
         if a != b:
             if self.size[a] < self.size[b]:
                 a, b = b, a
+
             self.num_sets -= 1
             self.parent[b] = a
             self.size[a] += self.size[b]
+            
+            if self.max_size<self.size[a]:
+                self.max_size = self.size[a]
 
     def set_size(self, a):
         return self.size[self.find(a)]
@@ -44,16 +48,10 @@ class UnionFind:
         self.parent[self.find(b)] = self.find(a)
 
 
-n, q = map(int, input().split())
-dsu = DisjointSetUnion(n)
-uf = UnionFind(n)
-
-for i in range(q):
-    t, a, b = map(int, input().split())
-    if t == 0:
-        dsu.union(a, b)
-    elif t == 1:
-        if dsu.find(a) == dsu.find(b):
-            print(1)
-        else:
-            print(0)
+n,m = map(int, input().split())
+dsu = DisjointSetUnion(n+1)
+for i in range(m):
+    x, y = map(int, input().split())
+    dsu.union(x, y)
+    print(dsu.num_sets-1, dsu.max_size)
+    
