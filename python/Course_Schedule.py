@@ -1,10 +1,12 @@
 import sys
-
+# topological sort
+# topo sort
 sys.setrecursionlimit(10**6)
 adj = {}
 n, m = map(int, input().split())
 adj = {}
 for i in range(n):
+    
     adj[i] = []
 for i in range(m):
     x, y = map(int, input().split())
