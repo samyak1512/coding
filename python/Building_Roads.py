@@ -13,5 +13,7 @@ print(adj)
 count = 0
 new_roads = []
 
-visited = []
+visited = set()
 for node in range(n):
+    
+    
