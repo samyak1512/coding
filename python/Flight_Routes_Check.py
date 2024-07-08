@@ -47,59 +47,58 @@
 # 	print("YES")
 
 # previous solution
-import sys
-sys.setrecursionlimit(10**5)
-n,m = map(int, input().split())
-adj = {}
-rev_adj = {}
-for i in range(n):
-    adj[i] = []
-    rev_adj[i] = []
-for i in range(m):
-    x, y = map(int, input().split())
-    x-=1
-    y-=1
-    adj[x].append(y)
-    rev_adj[y].append(x)
-
 def kosaraju(adj, rev_adj):
     def dfs(node, graph, visited, stack):
-        visited.add(node)
+        visited[node] = True
         for neigh in graph[node]:
-            if neigh not in visited:
+            if not visited[neigh]:
                 dfs(neigh, graph, visited, stack)
         stack.append(node)
 
     def reverse_dfs(node, graph, visited, component):
-        visited.add(node)
+        visited[node] = True
         component.append(node)
         for neigh in graph[node]:
-            if neigh not in visited:
+            if not visited[neigh]:
                 reverse_dfs(neigh, graph, visited, component)
 
     n = len(adj)
-    visited = set()
+    visited = [False] * n
     stack = []
     
     for i in range(n):
-        if i not in visited:
+        if not visited[i]:
             dfs(i, adj, visited, stack)
     
-    visited.clear()
+    visited = [False] * n
     scc = []
     while stack:
         node = stack.pop()
-        if node not in visited:
+        if not visited[node]:
             component = []
             reverse_dfs(node, rev_adj, visited, component)
             scc.append(component)
     
     return scc
 
+# Main code
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
+
+n, m = map(int, input().split())
+adj = [[] for _ in range(n)]
+rev_adj = [[] for _ in range(n)]
+
+for _ in range(m):
+    x, y = map(int, input().split())
+    adj[x-1].append(y-1)
+    rev_adj[y-1].append(x-1)
+
 result = kosaraju(adj, rev_adj)
-# print(result)
-if len(result[0]) == n:
+
+if len(result) == 1:
     print("YES")
 else:
     print("NO")
-    print(result[1][0]+1, result[0][0])
+    print(result[1][0] + 1, result[0][0] + 1)
