@@ -47,7 +47,8 @@
 # 	print("YES")
 
 # previous solution
-
+import sys
+sys.setrecursionlimit(10**5)
 n,m = map(int, input().split())
 adj = {}
 rev_adj = {}
@@ -58,30 +59,47 @@ for i in range(m):
     x, y = map(int, input().split())
     x-=1
     y-=1
-    adj[i].append(x)
-    rev_adj[i].append(x)
-from collections import deque
+    adj[x].append(y)
+    rev_adj[y].append(x)
 
-def bfs(node):
-    q = deque()
+def kosaraju(adj, rev_adj):
+    def dfs(node, graph, visited, stack):
+        visited.add(node)
+        for neigh in graph[node]:
+            if neigh not in visited:
+                dfs(neigh, graph, visited, stack)
+        stack.append(node)
+
+    def reverse_dfs(node, graph, visited, component):
+        visited.add(node)
+        component.append(node)
+        for neigh in graph[node]:
+            if neigh not in visited:
+                reverse_dfs(neigh, graph, visited, component)
+
+    n = len(adj)
     visited = set()
-    q.append(node)
-    while q:
-        q.popleft()
-        for neigh in adj[node]:
-            visited.add(neigh)
-    return visited
-
-visited = bfs(0)
-
-if len(visited) == n:
+    stack = []
     
-    
-
-else:
-    print("NO")
-    node = 0
     for i in range(n):
         if i not in visited:
-            node = i
-    print(1, node+1)
+            dfs(i, adj, visited, stack)
+    
+    visited.clear()
+    scc = []
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            component = []
+            reverse_dfs(node, rev_adj, visited, component)
+            scc.append(component)
+    
+    return scc
+
+result = kosaraju(adj, rev_adj)
+# print(result)
+if len(result[0]) == n:
+    print("YES")
+else:
+    print("NO")
+    print(result[1][0]+1, result[0][0])
